@@ -1,0 +1,76 @@
+---
+title: "Tutorial Plans (Introduction to Data Science)"
+output: html_notebook
+---
+
+# 1. Frame Question
+
+## predictive v.s. descriptive
+
+# 2. Background info about Dataset
+
+## Feature descriptions
+
+Citation
+Data source: https://archive.ics.uci.edu/ml/datasets/adult 
+```{r}
+## Load data and library
+#library(tidyr)
+
+tempTrain <- tempfile()
+tempTest <- tempfile()
+varNames <- c("age", "workclass","fnlwgt","education","education-num","marital-status","occupation","relationship","race","sex","capital-gain","capital-loss","hours-per-week","native-country", "income")
+download.file("https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data",destfile=tempTrain, method="curl")
+download.file("https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.test",destfile=tempTest, method="curl")
+raw_data_train <- read.csv(tempTrain, col.names = varNames)
+raw_data_test <- read.csv(tempTest, col.names = varNames)
+```
+
+
+# 3. Cleaning
+
+```{r}
+## Generalize levels: (String manipulation)
+# native country
+# workclass
+# education
+# marital.status
+
+## Missing values in: (impute NA values) ("bin" values)
+# native.country
+# workclass
+# capital.gain
+# capital.loss
+```
+
+# 4.Variable plots
+```{r}
+## Multicollinearity (Feature engineering)
+scatterplot.matrix(~age+workclass+education+marital.status | income, data=t[1:100,], main="Income")
+
+# education v.s. education-num
+
+# marital.status v.s. relationship
+```
+# 5.Training v.s. Test set (optional)
+
+# 6.Model comparison
+```{r} 
+#(With cross validation)
+## 6.1 Logistic Regression
+
+## 6.2 Random forest
+### Feature selection (Boruta)
+
+## 6.3 Neural Networks (Keras for Tensorflow)
+
+```
+
+# 7.Validation
+```{r}
+## confusion matrix
+
+## ROC
+
+```
+
