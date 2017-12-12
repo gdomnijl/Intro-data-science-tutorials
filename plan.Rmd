@@ -1,12 +1,12 @@
 ---
-title: "Tutorial Plans (Introduction to Data Science)"
+title: "Tutorial Plans (Introduction to Data Science"
 output: html_notebook
 ---
 
 # 1. Frame Question
 
 ## predictive v.s. descriptive
-
+## 
 # 2. Background info about Dataset
 
 ## Feature descriptions
@@ -36,7 +36,7 @@ raw_data_test <- read.csv(tempTest, col.names = varNames)
 # education
 # marital.status
 
-## Missing values in: (impute NA values) ("bin" values)
+## Missing values in: (impute NA values [DISCUSS THE ISSUE, subsection, true data vs 10% from every column, three types of different analysis, full model vs missing data vs imputation; see how does it changes. NA are not random; weighted drop, just two/one column + how well it worked]) ("bin" values)
 # native.country
 # workclass
 # capital.gain
@@ -66,7 +66,7 @@ scatterplot.matrix(~age+workclass+education+marital.status | income, data=t[1:10
 
 ```
 
-# 7.Validation
+# 7. Validation on test set
 ```{r}
 ## confusion matrix
 
@@ -74,3 +74,8 @@ scatterplot.matrix(~age+workclass+education+marital.status | income, data=t[1:10
 
 ```
 
+# 8. Discussion
+
+## Other ideas:
+# NLP (facebook bot)
+# image classification
