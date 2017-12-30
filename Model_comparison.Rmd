@@ -1,13 +1,11 @@
 ---
-title: "Tutorial Plans (Introduction to Data Science)"
+title: "Tutorial 2: Model Comparison on Predicting Income Over $50K (Adult Censor Data)"
 output: html_notebook
 ---
 
-# 1. Frame Question
+# 1. Frame Question & Specify Goal
 
 ## predictive v.s. descriptive
-## 
-# 2. Background info about Dataset
 
 ## Feature descriptions
 

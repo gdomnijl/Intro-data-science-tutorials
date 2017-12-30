@@ -1,0 +1,76 @@
+---
+title: "Tutorial 1: Impact of Imputation of NA values in Adult Censor Data"
+output: html_notebook
+---
+```{r}
+#Question for prof Kuiper:
+# 1. NAs are in categorical factors with so many levels, it is hard to do NA imputation on the original data. So remove NAs first and treat the remaining sample as full data? 
+```
+
+
+```{r}
+## Import Libraries
+library(tidyverse)
+```
+
+# 1. Background info about Dataset
+
+##  Feature descriptions
+
+Citation
+Data source: https://archive.ics.uci.edu/ml/datasets/adult 
+
+## Import data
+```{r}
+## Load data and library
+#library(tidyr)
+
+tempTrain <- tempfile()
+tempTest <- tempfile()
+varNames <- c("age", "workclass","fnlwgt","education","education-num","marital-status","occupation","relationship","race","sex","capital-gain","capital-loss","hours-per-week","native-country", "income")
+download.file("https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data",destfile=tempTrain, method="curl")
+download.file("https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.test",destfile=tempTest, method="curl")
+raw_data_train <- read.csv(tempTrain, col.names = varNames)
+raw_data_test <- read.csv(tempTest, col.names = varNames)
+```
+
+# 2. Identify NAs in original dataset
+```{r}
+#summary(raw_data_train)
+
+## 2.1 Factor 'workclass': Response ' ?' are NAs
+raw_data_test2 <- raw_data_test %>%
+  mutate(workclass2 = ifelse(workclass==" ?", 'NA', workclass)) ## PROBLEM??
+
+t <- as.data.frame(table(raw_data_test$workclass,raw_data_test$income)) %>% 
+  spread(Var2, Freq) %>%
+  mutate (ratio = t[,3]/t[,2]) %>% #>50k vs <= 50k
+  plot(ratio, Var1)
+
+#Finding: ratio for ' ?' are lower than average for workclass
+#Question: there is no point estimating the categorical NA values
+
+## 2.2 Factor 'native.country' : Response ' ?' are NAs
+raw_data_test2 <- raw_data_test2 %>%
+  mutate(native.country2 = ifelse(native.country==" ?", NA, native.country))  ## same problem
+ n <- as.data.frame(table(raw_data_test$native.country,raw_data_test$income)) %>% 
+  spread(Var2, Freq) %>%
+  mutate (ratio = n[,3]/n[,2])  #>50k vs <= 50k
+ plot(n$Var1, n$ratio)
+ 
+#Finding: NAs do not have obviously lower or higher ratio than average
+#Same question
+ 
+## 2.3 Factor 'capital.gain' 'capital.loss' have > 90% 0 values => check back on factor description why
+
+## 2.4 False alarm: 
+
+# After checking on Factor 'hours.per.week',
+# hist(raw_data_test$hours.per.week, labels = TRUE) 
+# hist(raw_data_train$hours.per.week, labels = TRUE) 
+# though 35~40 hrs/week takes up about half of the observations, there is an even distribution throughout other ranges with significant amount of observations at both upper end(100hrs) and lower end (1hr) (>50 out of 16281 for test set; >100 out of 32569 for training set)
+```
+
+# 3. NA value distribution
+
+# 4.
