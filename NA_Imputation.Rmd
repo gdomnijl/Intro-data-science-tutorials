@@ -34,7 +34,13 @@ raw_data_train <- read.csv(tempTrain, col.names = varNames)
 raw_data_test <- read.csv(tempTest, col.names = varNames)
 ```
 
-# 2. Identify NAs in original dataset
+
+# 2. Discuss the issue of NA values
+```{r}
+
+```
+
+# 3. Identify NAs in original dataset and NA distribution
 ```{r}
 #summary(raw_data_train)
 
@@ -71,6 +77,25 @@ raw_data_test2 <- raw_data_test2 %>%
 # though 35~40 hrs/week takes up about half of the observations, there is an even distribution throughout other ranges with significant amount of observations at both upper end(100hrs) and lower end (1hr) (>50 out of 16281 for test set; >100 out of 32569 for training set)
 ```
 
-# 3. NA value distribution
+# (Alternative) 3. Artificially create 10% NA values in NA-free dataset
+```{r}
+## Create an NA-omit dataset 
 
-# 4.
+## artificially create 10% NA values in continuous variables(?): 
+# age, educaiton.num, hours.per.week
+
+```
+
+
+# 4. Impute NA values
+```{r}
+# true data vs -10% from every column
+# NAs are usually not random => weighted drop
+# just two/one column + how well it worked 
+```
+
+# 5. Compare analysis on full dataset v.s. NA dataset v.s. dataset after imputation
+```{r}
+
+```
+

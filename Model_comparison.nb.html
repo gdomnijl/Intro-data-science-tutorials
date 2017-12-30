@@ -177,8 +177,8 @@ $(document).ready(function () {
 <div id="predictive-v.s.-descriptive" class="section level2">
 <h2>predictive v.s. descriptive</h2>
 </div>
-<div id="feature-descriptions" class="section level2">
-<h2>Feature descriptions</h2>
+<div id="background-info-about-the-dataset-reference-to-tutorial-1" class="section level2">
+<h2>Background info about the dataset (reference to tutorial 1)</h2>
 <p>Citation Data source: <a href="https://archive.ics.uci.edu/ml/datasets/adult" class="uri">https://archive.ics.uci.edu/ml/datasets/adult</a></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -199,17 +199,17 @@ raw_data_test &lt;- read.csv(tempTest, col.names = varNames)</code></pre>
 </div>
 </div>
 <div id="cleaning" class="section level1">
-<h1>3. Cleaning</h1>
+<h1>2. Cleaning</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgR2VuZXJhbGl6ZSBsZXZlbHM6IChTdHJpbmcgbWFuaXB1bGF0aW9uKVxuIyBuYXRpdmUgY291bnRyeVxuIyB3b3JrY2xhc3NcbiMgZWR1Y2F0aW9uXG4jIG1hcml0YWwuc3RhdHVzXG5cbiMjIE1pc3NpbmcgdmFsdWVzIGluOiAoaW1wdXRlIE5BIHZhbHVlcyBbRElTQ1VTUyBUSEUgSVNTVUUsIHN1YnNlY3Rpb24sIHRydWUgZGF0YSB2cyAtMTAlIGZyb20gZXZlcnkgY29sdW1uLCB0aHJlZSB0eXBlcyBvZiBkaWZmZXJlbnQgYW5hbHlzaXMsIGZ1bGwgbW9kZWwgdnMgbWlzc2luZyBkYXRhIHZzIGltcHV0YXRpb247IHNlZSBob3cgZG9lcyBpdCBjaGFuZ2VzLiBOQSBhcmUgbm90IHJhbmRvbTsgd2VpZ2h0ZWQgZHJvcCwganVzdCB0d28vb25lIGNvbHVtbiArIGhvdyB3ZWxsIGl0IHdvcmtlZF0pIChcImJpblwiIHZhbHVlcylcbiMgbmF0aXZlLmNvdW50cnlcbiMgd29ya2NsYXNzXG4jIGNhcGl0YWwuZ2FpblxuIyBjYXBpdGFsLmxvc3NcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgR2VuZXJhbGl6ZSBsZXZlbHM6IChTdHJpbmcgbWFuaXB1bGF0aW9uKVxuIyBuYXRpdmUgY291bnRyeVxuIyB3b3JrY2xhc3NcbiMgZWR1Y2F0aW9uXG4jIG1hcml0YWwuc3RhdHVzXG5cbiMjIE1pc3NpbmcgdmFsdWVzIGluOiAoXCJiaW5cIiB2YWx1ZXMpXG4jIG5hdGl2ZS5jb3VudHJ5XG4jIHdvcmtjbGFzc1xuIyBjYXBpdGFsLmdhaW5cbiMgY2FwaXRhbC5sb3NzXG5gYGAifQ== -->
 <pre class="r"><code>## Generalize levels: (String manipulation)
 # native country
 # workclass
 # education
 # marital.status
 
-## Missing values in: (impute NA values [DISCUSS THE ISSUE, subsection, true data vs -10% from every column, three types of different analysis, full model vs missing data vs imputation; see how does it changes. NA are not random; weighted drop, just two/one column + how well it worked]) (&quot;bin&quot; values)
+## Missing values in: (&quot;bin&quot; values)
 # native.country
 # workclass
 # capital.gain
@@ -219,7 +219,7 @@ raw_data_test &lt;- read.csv(tempTest, col.names = varNames)</code></pre>
 <!-- rnb-text-begin -->
 </div>
 <div id="variable-plots" class="section level1">
-<h1>4.Variable plots</h1>
+<h1>3.Variable plots</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgTXVsdGljb2xsaW5lYXJpdHkgKEZlYXR1cmUgZW5naW5lZXJpbmcpXG5zY2F0dGVycGxvdC5tYXRyaXgofmFnZSt3b3JrY2xhc3MrZWR1Y2F0aW9uK21hcml0YWwuc3RhdHVzIHwgaW5jb21lLCBkYXRhPXRbMToxMDAsXSwgbWFpbj1cIkluY29tZVwiKVxuXG4jIGVkdWNhdGlvbiB2LnMuIGVkdWNhdGlvbi1udW1cblxuIyBtYXJpdGFsLnN0YXR1cyB2LnMuIHJlbGF0aW9uc2hpcFxuYGBgIn0= -->
@@ -233,28 +233,25 @@ scatterplot.matrix(~age+workclass+education+marital.status | income, data=t[1:10
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="training-v.s.-test-set-optional" class="section level1">
-<h1>5.Training v.s. Test set (optional)</h1>
-</div>
 <div id="model-comparison" class="section level1">
-<h1>6.Model comparison</h1>
+<h1>5.Model comparison</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyhXaXRoIGNyb3NzIHZhbGlkYXRpb24pXG4jIyA2LjEgTG9naXN0aWMgUmVncmVzc2lvblxuXG4jIyA2LjIgUmFuZG9tIGZvcmVzdFxuIyMjIEZlYXR1cmUgc2VsZWN0aW9uIChCb3J1dGEpXG5cbiMjIDYuMyBOZXVyYWwgTmV0d29ya3MgKEtlcmFzIGZvciBUZW5zb3JmbG93KVxuXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyhXaXRoIGNyb3NzIHZhbGlkYXRpb24pXG4jIyA1LjEgTG9naXN0aWMgUmVncmVzc2lvblxuXG4jIyA1LjIgUmFuZG9tIGZvcmVzdFxuXG4jIyA1LjMgTmV1cmFsIE5ldHdvcmtzIChLZXJhcyBmb3IgVGVuc29yZmxvdylcblxuIyMgLi4uXG5gYGAifQ== -->
 <pre class="r"><code>#(With cross validation)
-## 6.1 Logistic Regression
+## 5.1 Logistic Regression
 
-## 6.2 Random forest
-### Feature selection (Boruta)
+## 5.2 Random forest
 
-## 6.3 Neural Networks (Keras for Tensorflow)
-</code></pre>
+## 5.3 Neural Networks (Keras for Tensorflow)
+
+## ...</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
 <div id="validation-on-test-set" class="section level1">
-<h1>7. Validation on test set</h1>
+<h1>6. Validation on test set</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgY29uZnVzaW9uIG1hdHJpeFxuXG4jIyBST0NcblxuYGBgIn0= -->
@@ -267,20 +264,11 @@ scatterplot.matrix(~age+workclass+education+marital.status | income, data=t[1:10
 <!-- rnb-text-begin -->
 </div>
 <div id="discussion" class="section level1">
-<h1>8. Discussion</h1>
-<div id="other-ideas" class="section level2">
-<h2>Other ideas:</h2>
-</div>
-</div>
-<div id="nlp-facebook-bot" class="section level1">
-<h1>NLP (facebook bot)</h1>
-</div>
-<div id="image-classification" class="section level1">
-<h1>image classification</h1>
+<h1>7. Discussion</h1>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVHV0b3JpYWwgMjogTW9kZWwgQ29tcGFyaXNvbiBvbiBQcmVkaWN0aW5nIEluY29tZSBPdmVyICQ1MEsgKEFkdWx0IENlbnNvciBEYXRhKSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyAxLiBGcmFtZSBRdWVzdGlvbiAmIFNwZWNpZnkgR29hbAoKIyMgcHJlZGljdGl2ZSB2LnMuIGRlc2NyaXB0aXZlCgojIyBGZWF0dXJlIGRlc2NyaXB0aW9ucwoKQ2l0YXRpb24KRGF0YSBzb3VyY2U6IGh0dHBzOi8vYXJjaGl2ZS5pY3MudWNpLmVkdS9tbC9kYXRhc2V0cy9hZHVsdCAKYGBge3J9CiMjIExvYWQgZGF0YSBhbmQgbGlicmFyeQojbGlicmFyeSh0aWR5cikKCnRlbXBUcmFpbiA8LSB0ZW1wZmlsZSgpCnRlbXBUZXN0IDwtIHRlbXBmaWxlKCkKdmFyTmFtZXMgPC0gYygiYWdlIiwgIndvcmtjbGFzcyIsImZubHdndCIsImVkdWNhdGlvbiIsImVkdWNhdGlvbi1udW0iLCJtYXJpdGFsLXN0YXR1cyIsIm9jY3VwYXRpb24iLCJyZWxhdGlvbnNoaXAiLCJyYWNlIiwic2V4IiwiY2FwaXRhbC1nYWluIiwiY2FwaXRhbC1sb3NzIiwiaG91cnMtcGVyLXdlZWsiLCJuYXRpdmUtY291bnRyeSIsICJpbmNvbWUiKQpkb3dubG9hZC5maWxlKCJodHRwczovL2FyY2hpdmUuaWNzLnVjaS5lZHUvbWwvbWFjaGluZS1sZWFybmluZy1kYXRhYmFzZXMvYWR1bHQvYWR1bHQuZGF0YSIsZGVzdGZpbGU9dGVtcFRyYWluLCBtZXRob2Q9ImN1cmwiKQpkb3dubG9hZC5maWxlKCJodHRwczovL2FyY2hpdmUuaWNzLnVjaS5lZHUvbWwvbWFjaGluZS1sZWFybmluZy1kYXRhYmFzZXMvYWR1bHQvYWR1bHQudGVzdCIsZGVzdGZpbGU9dGVtcFRlc3QsIG1ldGhvZD0iY3VybCIpCnJhd19kYXRhX3RyYWluIDwtIHJlYWQuY3N2KHRlbXBUcmFpbiwgY29sLm5hbWVzID0gdmFyTmFtZXMpCnJhd19kYXRhX3Rlc3QgPC0gcmVhZC5jc3YodGVtcFRlc3QsIGNvbC5uYW1lcyA9IHZhck5hbWVzKQpgYGAKCgojIDMuIENsZWFuaW5nCgpgYGB7cn0KIyMgR2VuZXJhbGl6ZSBsZXZlbHM6IChTdHJpbmcgbWFuaXB1bGF0aW9uKQojIG5hdGl2ZSBjb3VudHJ5CiMgd29ya2NsYXNzCiMgZWR1Y2F0aW9uCiMgbWFyaXRhbC5zdGF0dXMKCiMjIE1pc3NpbmcgdmFsdWVzIGluOiAoaW1wdXRlIE5BIHZhbHVlcyBbRElTQ1VTUyBUSEUgSVNTVUUsIHN1YnNlY3Rpb24sIHRydWUgZGF0YSB2cyAtMTAlIGZyb20gZXZlcnkgY29sdW1uLCB0aHJlZSB0eXBlcyBvZiBkaWZmZXJlbnQgYW5hbHlzaXMsIGZ1bGwgbW9kZWwgdnMgbWlzc2luZyBkYXRhIHZzIGltcHV0YXRpb247IHNlZSBob3cgZG9lcyBpdCBjaGFuZ2VzLiBOQSBhcmUgbm90IHJhbmRvbTsgd2VpZ2h0ZWQgZHJvcCwganVzdCB0d28vb25lIGNvbHVtbiArIGhvdyB3ZWxsIGl0IHdvcmtlZF0pICgiYmluIiB2YWx1ZXMpCiMgbmF0aXZlLmNvdW50cnkKIyB3b3JrY2xhc3MKIyBjYXBpdGFsLmdhaW4KIyBjYXBpdGFsLmxvc3MKYGBgCgojIDQuVmFyaWFibGUgcGxvdHMKYGBge3J9CiMjIE11bHRpY29sbGluZWFyaXR5IChGZWF0dXJlIGVuZ2luZWVyaW5nKQpzY2F0dGVycGxvdC5tYXRyaXgofmFnZSt3b3JrY2xhc3MrZWR1Y2F0aW9uK21hcml0YWwuc3RhdHVzIHwgaW5jb21lLCBkYXRhPXRbMToxMDAsXSwgbWFpbj0iSW5jb21lIikKCiMgZWR1Y2F0aW9uIHYucy4gZWR1Y2F0aW9uLW51bQoKIyBtYXJpdGFsLnN0YXR1cyB2LnMuIHJlbGF0aW9uc2hpcApgYGAKIyA1LlRyYWluaW5nIHYucy4gVGVzdCBzZXQgKG9wdGlvbmFsKQoKIyA2Lk1vZGVsIGNvbXBhcmlzb24KYGBge3J9IAojKFdpdGggY3Jvc3MgdmFsaWRhdGlvbikKIyMgNi4xIExvZ2lzdGljIFJlZ3Jlc3Npb24KCiMjIDYuMiBSYW5kb20gZm9yZXN0CiMjIyBGZWF0dXJlIHNlbGVjdGlvbiAoQm9ydXRhKQoKIyMgNi4zIE5ldXJhbCBOZXR3b3JrcyAoS2VyYXMgZm9yIFRlbnNvcmZsb3cpCgpgYGAKCiMgNy4gVmFsaWRhdGlvbiBvbiB0ZXN0IHNldApgYGB7cn0KIyMgY29uZnVzaW9uIG1hdHJpeAoKIyMgUk9DCgpgYGAKCiMgOC4gRGlzY3Vzc2lvbgoKIyMgT3RoZXIgaWRlYXM6CiMgTkxQIChmYWNlYm9vayBib3QpCiMgaW1hZ2UgY2xhc3NpZmljYXRpb24K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVHV0b3JpYWwgMjogTW9kZWwgQ29tcGFyaXNvbiBvbiBQcmVkaWN0aW5nIEluY29tZSBPdmVyICQ1MEsgKEFkdWx0IENlbnNvciBEYXRhKSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyAxLiBGcmFtZSBRdWVzdGlvbiAmIFNwZWNpZnkgR29hbAoKIyMgcHJlZGljdGl2ZSB2LnMuIGRlc2NyaXB0aXZlCgojIyBCYWNrZ3JvdW5kIGluZm8gYWJvdXQgdGhlIGRhdGFzZXQgKHJlZmVyZW5jZSB0byB0dXRvcmlhbCAxKQoKQ2l0YXRpb24KRGF0YSBzb3VyY2U6IGh0dHBzOi8vYXJjaGl2ZS5pY3MudWNpLmVkdS9tbC9kYXRhc2V0cy9hZHVsdCAKYGBge3J9CiMjIExvYWQgZGF0YSBhbmQgbGlicmFyeQojbGlicmFyeSh0aWR5cikKCnRlbXBUcmFpbiA8LSB0ZW1wZmlsZSgpCnRlbXBUZXN0IDwtIHRlbXBmaWxlKCkKdmFyTmFtZXMgPC0gYygiYWdlIiwgIndvcmtjbGFzcyIsImZubHdndCIsImVkdWNhdGlvbiIsImVkdWNhdGlvbi1udW0iLCJtYXJpdGFsLXN0YXR1cyIsIm9jY3VwYXRpb24iLCJyZWxhdGlvbnNoaXAiLCJyYWNlIiwic2V4IiwiY2FwaXRhbC1nYWluIiwiY2FwaXRhbC1sb3NzIiwiaG91cnMtcGVyLXdlZWsiLCJuYXRpdmUtY291bnRyeSIsICJpbmNvbWUiKQpkb3dubG9hZC5maWxlKCJodHRwczovL2FyY2hpdmUuaWNzLnVjaS5lZHUvbWwvbWFjaGluZS1sZWFybmluZy1kYXRhYmFzZXMvYWR1bHQvYWR1bHQuZGF0YSIsZGVzdGZpbGU9dGVtcFRyYWluLCBtZXRob2Q9ImN1cmwiKQpkb3dubG9hZC5maWxlKCJodHRwczovL2FyY2hpdmUuaWNzLnVjaS5lZHUvbWwvbWFjaGluZS1sZWFybmluZy1kYXRhYmFzZXMvYWR1bHQvYWR1bHQudGVzdCIsZGVzdGZpbGU9dGVtcFRlc3QsIG1ldGhvZD0iY3VybCIpCnJhd19kYXRhX3RyYWluIDwtIHJlYWQuY3N2KHRlbXBUcmFpbiwgY29sLm5hbWVzID0gdmFyTmFtZXMpCnJhd19kYXRhX3Rlc3QgPC0gcmVhZC5jc3YodGVtcFRlc3QsIGNvbC5uYW1lcyA9IHZhck5hbWVzKQpgYGAKCgojIDIuIENsZWFuaW5nCgpgYGB7cn0KIyMgR2VuZXJhbGl6ZSBsZXZlbHM6IChTdHJpbmcgbWFuaXB1bGF0aW9uKQojIG5hdGl2ZSBjb3VudHJ5CiMgd29ya2NsYXNzCiMgZWR1Y2F0aW9uCiMgbWFyaXRhbC5zdGF0dXMKCiMjIE1pc3NpbmcgdmFsdWVzIGluOiAoImJpbiIgdmFsdWVzKQojIG5hdGl2ZS5jb3VudHJ5CiMgd29ya2NsYXNzCiMgY2FwaXRhbC5nYWluCiMgY2FwaXRhbC5sb3NzCmBgYAoKIyAzLlZhcmlhYmxlIHBsb3RzCmBgYHtyfQojIyBNdWx0aWNvbGxpbmVhcml0eSAoRmVhdHVyZSBlbmdpbmVlcmluZykKc2NhdHRlcnBsb3QubWF0cml4KH5hZ2Urd29ya2NsYXNzK2VkdWNhdGlvbittYXJpdGFsLnN0YXR1cyB8IGluY29tZSwgZGF0YT10WzE6MTAwLF0sIG1haW49IkluY29tZSIpCgojIGVkdWNhdGlvbiB2LnMuIGVkdWNhdGlvbi1udW0KCiMgbWFyaXRhbC5zdGF0dXMgdi5zLiByZWxhdGlvbnNoaXAKYGBgCgojIDUuTW9kZWwgY29tcGFyaXNvbgpgYGB7cn0gCiMoV2l0aCBjcm9zcyB2YWxpZGF0aW9uKQojIyA1LjEgTG9naXN0aWMgUmVncmVzc2lvbgoKIyMgNS4yIFJhbmRvbSBmb3Jlc3QKCiMjIDUuMyBOZXVyYWwgTmV0d29ya3MgKEtlcmFzIGZvciBUZW5zb3JmbG93KQoKIyMgLi4uCmBgYAoKIyA2LiBWYWxpZGF0aW9uIG9uIHRlc3Qgc2V0CmBgYHtyfQojIyBjb25mdXNpb24gbWF0cml4CgojIyBST0MKCmBgYAoKIyA3LiBEaXNjdXNzaW9uCgo=</div>
 
 
 
