@@ -12,6 +12,7 @@
 # Step 1 
 # Assume MCAR:
 # Drop __% (5, 15, 30) of the values randomly
+# NOTE: % = #NAs/#obs not #entries
 # TODO: how to simulate systematically missing values
 
 # Assume MAR: 
@@ -24,7 +25,7 @@
 
 # Step 2
 # NA imputation
-## layered imputaiton:
+## multip;e imputation:
 ## correlation matrix to select best predictors then impute predicted values
 
 ##(EVAL:First, because the replaced values were predicted from other variables
@@ -59,6 +60,10 @@
 # Parametric (regression) vs Non-parametric (KNN, decision trees)
 # See if some models are more tolerative to NAs, and to which levels.
 
+
+## Citation:
+#https://gking.harvard.edu/amelia
+#When multiple imputation works properly, it fills in data in such a way as to not change any relationships in the data but which enables the inclusion of all the observed data in the partially missing rows
 ##-------------------------- Implementation -----------------------------------------------------------------
 
 ## Step 0.5
@@ -69,29 +74,75 @@
 # Solution: Ignore these 4 features for now 
 
 
-# Check distibution of each dimension
+
+
+## ------ Step 1: Drop 5, 15, 30% of the values ----
+r1 <- raw_data_train %>%
+  select(-c(workclass, occupation, capital.gain, capital.loss, fnlwgt, native.country))
+
+# Randomly elect __% of the rows with replacement
+rows_5 <-sample(nrow(r1), 0.05*nrow(r1), replace = TRUE)
+rows_15 <-sample(nrow(r1), 0.15*nrow(r1), replace = TRUE)
+rows_30 <-sample(nrow(r1), 0.3*nrow(r1), replace = TRUE)
+
+# ------- If % defined as #NA/#rows: --------
+# Fill in NAs within each row: 
+r1NA_5 <- r1
+r1NA_15 <- r1
+r1NA_30 <- r1
+
+for(i in 1:length(rows_5)){
+  rand_col <- sample(ncol(r1)-1,1) ## CHECK: Use the same random col?
+  r1NA_5[rows_5[i],rand_col] <- NA
+}
+
+for(i in 1:length(rows_15)){
+  rand_col <- sample(ncol(r1)-1,1) ## CHECK: Use the same random col?
+  r1NA_15[rows_15[i],rand_col] <- NA
+}
+
+for(i in 1:length(rows_30)){
+  rand_col <- sample(ncol(r1)-1,1) ## CHECK: Use the same random col?
+  r1NA_30[rows_30[i],rand_col] <- NA
+}
+
+# ------- If % defined as #NA/#all_entries: --------
+# use missforest to seed 
+library(missForest)
+r1NA_5 <- prodNA(r1, noNA = 0.05)
+r1NA_15 <- prodNA(r1, noNA = 0.15)
+r1NA_30 <- prodNA(r1, noNA = 0.3)
+## ----- Step 1.5: Describe NAs (not much to show for MCAR) ------
+
+# Use MICE:
+library(mice)
+md.pattern(r1NA_5) #NOTE: evidence for MCAR
+md.pattern(r1NA_15)
+md.pattern(r1NA_30)
+## Histogram of NA Count per row
+# Calculate NA Matrix and num_NA per row
+narows_5 <- rowSums(is.na(r1NA_5))
+narows_15 <- rowSums(is.na(r1NA_15))
+narows_30 <- rowSums(is.na(r1NA_30))
+
+# Plot
+hist(narows_5, main = "Number of NA Values in Each Row", xlab = "NA Count")
+hist(narows_15, main = "Number of NA Values in Each Row", xlab = "NA Count")
+hist(narows_30, main = "Number of NA Values in Each Row", xlab = "NA Count")
+
+## Income vs NA_per_row
+boxplot(narows_30 ~ r1NA_30$income) # mostly zero
+ 
+# TODO for other cases: Check distibution of each dimension
 hist(raw_data_train)
 library(vcd)
 mosaic(raw_data_train$workclass)
 
-## Step 1: Drop 5% of the values
-r1 <- raw_data_train %>%
-  select(-c(workclass, occupation, capital.gain, capital.loss, fnlwgt, native.country))
 
-# Randomly elect 0.5% of the rows with replacement
-rows_5 <-sample(nrow(r1), 0.05*nrow(r1), replace = TRUE)
-# Fill in NAs within each row: CHECK IF TRULY RANDOM
-r1_NA <- r1
-for(i in 1:length(rows_5)){
-  rand_col <- sample(ncol(r1)-1,1)
-  r1_NA[rows_5[i],rand_col] <- NA
-}
+## ----- Step 2: Imputation -------- 
+# 4 methods for categorical 
+# for continuous
+# correlation method already employed in packages? 
+# compare the 5 packages
+# plus na.omit
 
-## Step 1.5: Describe NAs
-
-## Calculate NA Matrix
-na_matrix <- is.na(r1_NA)
-narows2 <- rowSums(na_matrix)
-
-## Histogram of NA Count in each row
-hist(narows2, main = "Number of NA Values in Each Row", xlab = "NA Count")
